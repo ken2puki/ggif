@@ -1,9 +1,13 @@
+import fs from 'fs';
+import path from 'path';
+
 export default function handler(req, res) {
   const ua = req.headers['user-agent'] || '';
+  const file = ua.includes('Discordbot') ? 'fake.png' : 'real.png';
+  const filePath = path.join(process.cwd(), 'public', file);
   
-  if (ua.includes('Discordbot')) {
-    return res.redirect(307, '/fake.png');
-  }
-  
-  return res.redirect(307, '/real.png');
+  const image = fs.readFileSync(filePath);
+  res.setHeader('Content-Type', 'image/png');
+  res.setHeader('Cache-Control', 'public, max-age=0, must-revalidate');
+  res.status(200).send(image);
 }
