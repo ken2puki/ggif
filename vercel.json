@@ -1,5 +1,6 @@
 {
   "rewrites": [
-    { "source": "/meow.gif", "destination": "/api/gif" }
+    { "source": "/meow.gif", "destination": "/api/gif" },
+    { "source": "/dmeow.gif", "destination": "/api/gif" }
   ]
 }
